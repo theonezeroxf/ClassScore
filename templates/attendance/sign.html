@@ -1,0 +1,2 @@
+{# 公开的学生签到页；成功后不再渲染输入表单。 #}
+{% extends 'base.html' %}{% load static %}{% block content %}<section class="card narrow"><h1>{{session.title}}</h1>{% if success %}<div class="success">签到成功</div>{% else %}<p id="location-status">正在获取位置…</p><form method="post" id="sign-form">{% csrf_token %}{{form.as_p}}<button id="submit" disabled>提交签到</button></form><p class="muted">定位通常需要 HTTPS（localhost 除外）。</p>{% endif %}</section>{% endblock %}{% block scripts %}{% if not success %}<script src="{% static 'js/attendance.js' %}"></script>{% endif %}{% endblock %}

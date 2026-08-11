@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1>班级</h1><a class="button" href="{% url 'class-create' %}">新建班级</a><div class="grid">{% for c in classes %}<a class="card" href="{% url 'class-detail' c.pk %}">{{c.name}} · {{c.students.count}} 人</a>{% empty %}<p class="empty">暂无班级</p>{% endfor %}</div>{% endblock %}
