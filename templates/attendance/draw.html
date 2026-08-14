@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="center">
+  <h1>{{ classroom.name }} 随机抽人</h1>
+  <div id="roller">准备抽取</div>
+  <button id="draw-button">开始抽取</button>
+  <div id="winner"></div>
+  <form method="post" id="score-form" hidden>
+    {% csrf_token %}
+    <input type="hidden" name="student_id" id="student-id" /><input
+      name="remark"
+      placeholder="备注（可选）"
+    />
+    {% for n in '123' %}
+    <button name="score_delta" value="{{ n }}">+{{ n }}</button>
+    {% endfor %}
+  </form>
+  {% if session %}
+  <h2>本节已抽名单</h2>
+  {% for x in drawn %}
+  <p>{{ x.student }} +{{ x.score_delta }}</p>
+  {% empty %}
+  <p>暂无</p>
+  {% endfor %} {% endif %}
+</section>
+{{ student_nos|json_script:'student-nos' }} {% endblock %} {% block scripts %}
+<script src="{% static 'js/draw_animation.js' %}"></script>
+{% endblock %}

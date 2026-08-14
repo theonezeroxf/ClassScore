@@ -1,0 +1,31 @@
+{# 全站布局：公共导航、消息区和可被子模板覆盖的内容块。 #}
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>课堂成绩</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <b>课堂成绩</b>
+      {% if user.is_authenticated %}
+      <a href="/">首页</a>
+  <a href="/classes/">班级</a>
+  <a href="/attendance/create/">创建签到</a>
+      <form action="/accounts/logout/" method="post">
+        {% csrf_token %}
+        <button>退出</button>
+      </form>
+      {% endif %}
+    </nav>
+    <main>
+      {% if messages %} {% for m in messages %}
+      <p>{{ m }}</p>
+      {% endfor %} {% endif %} {% block content %} {% endblock %}
+    </main>
+    {% block scripts %} {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h1>导入 {{ classroom.name }} 学生</h1>
+  <p>支持 CSV/XLSX；列名为“学号、姓名”（可包含班级）。</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}{{ form.as_p }}<button>导入</button>
+  </form>
+  {% if result %}
+  <p>
+    新增 {{ result.created }}，更新 {{ result.updated }}，失败 {{
+    result.errors|length }}
+  </p>
+  {% for e in result.errors %}
+  <p class="error">{{ e }}</p>
+  {% endfor %} {% endif %}
+</section>
+{% endblock %}

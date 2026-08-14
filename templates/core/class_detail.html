@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ classroom.name }}</h1>
+<div class="actions">
+  <a class="button" href="{% url 'student-import' classroom.pk %}">导入学生</a>
+  <a class="button" href="{% url 'draw' classroom.pk %}">随机抽人</a>
+  <a class="button" href="{% url 'grade-import' classroom.pk %}">导入成绩</a>
+</div>
+<table>
+  <tr>
+    <th>学号</th>
+    <th>姓名</th>
+  </tr>
+  {% for s in classroom.students.all %}
+  <tr>
+    <td>{{ s.student_no }}</td>
+    <td>{{ s.name }}</td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="2">暂无学生</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

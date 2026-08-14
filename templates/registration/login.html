@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card narrow">
+  <h1>教师登录</h1>
+  <form method="post">
+    {% csrf_token %}{{ form.as_p }}<button>登录</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h1>导入 {{ classroom.name }} 考试成绩</h1>
+  <p>支持 CSV/XLSX；列名为“学号、姓名、考试成绩”。</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}{{ form.as_p }}<button>导入并生成最终成绩</button>
+  </form>
+</section>
+{% endblock %}
